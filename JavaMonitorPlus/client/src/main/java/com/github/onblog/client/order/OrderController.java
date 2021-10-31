@@ -1,9 +1,6 @@
 package com.github.onblog.client.order;
 
-import com.github.onblog.client.core.entity.JinfoEntity;
-import com.github.onblog.client.core.entity.JpsEntity;
-import com.github.onblog.client.core.entity.JstackEntity;
-import com.github.onblog.client.core.entity.KVEntity;
+import com.github.onblog.client.core.entity.*;
 import com.github.onblog.client.core.order.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +47,16 @@ public class OrderController {
     @RequestMapping("/jstatutil")
     public List<KVEntity> getJstatUtil(String id) throws Exception {
         return Jstat.jstatUtil(id);
+    }
+
+    @RequestMapping("/cpuLoadInfo")
+    public CpuInfoEntity getCpuLoadInfo() {
+        return CpuInfo.info();
+    }
+
+    @RequestMapping("/memUsage")
+    public String getMemUsage() {
+        return MemUsage.usage();
     }
 
 }

@@ -20,12 +20,8 @@ class InputStreamRunnable implements Runnable {
     }
 
     public void run() {
-        String line;
-        int num = 1;
         try {
-            while ((line = bReader.readLine()) != null) {
-                //System.out.println("---->"+String.format("%02d",num++)+" "+line);
-            }
+            // 错误输出流直接不处理
             bReader.close();
         } catch (Exception ex) {
             ex.printStackTrace();
