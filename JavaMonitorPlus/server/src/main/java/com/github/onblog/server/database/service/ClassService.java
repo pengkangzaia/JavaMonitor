@@ -1,7 +1,7 @@
 package com.github.onblog.server.database.service;
 
 import com.github.onblog.server.core.entity.KVEntity;
-import com.github.onblog.server.database.dao.ClassLoadRespository;
+import com.github.onblog.server.database.dao.ClassLoadRepository;
 import com.github.onblog.server.database.entity.ClassLoadEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class ClassService {
     @Autowired
-    private ClassLoadRespository classLoadRespository;
+    private ClassLoadRepository classLoadRepository;
 
     public List<ClassLoadEntity> findAllByAddressAndName(String address, String name) {
-        return classLoadRespository.findAllByAddressAndName(address, name);
+        return classLoadRepository.findAllByAddressAndName(address, name);
     }
 
 
@@ -35,10 +35,10 @@ public class ClassService {
         entity.setFailed(jstatClass.get(6).getValue());
         entity.setInvalid(jstatClass.get(7).getValue());
         entity.setTime2(jstatClass.get(8).getValue());
-        classLoadRespository.save(entity);
+        classLoadRepository.save(entity);
     }
 
     public void clearAll() {
-        classLoadRespository.deleteAll();
+        classLoadRepository.deleteAll();
     }
 }

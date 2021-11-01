@@ -1,16 +1,16 @@
 package com.github.onblog.server.timer.job;
 
 
+import com.github.onblog.server.core.entity.CpuInfoEntity;
 import com.github.onblog.server.core.entity.JpsEntity;
 import com.github.onblog.server.core.entity.JstackEntity;
 import com.github.onblog.server.core.entity.KVEntity;
-import com.github.onblog.server.database.service.ClassService;
-import com.github.onblog.server.database.service.GcService;
-import com.github.onblog.server.database.service.ThreadService;
+import com.github.onblog.server.database.service.*;
 import com.github.onblog.server.remote.CallingMethod;
 import com.github.onblog.server.remote.parm.AddressParm;
 import com.github.onblog.server.remote.parm.entity.Address;
 import com.github.onblog.server.timer.util.TimerUtil;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +31,10 @@ public class UpdataJob extends QuartzJobBean {
     private ClassService classService;
     @Autowired
     private ThreadService threadService;
+    @Autowired
+    private CpuService cpuService;
+    @Autowired
+    private MemoryService memoryService;
     @Autowired
     private AddressParm address;
 
@@ -58,6 +62,12 @@ public class UpdataJob extends QuartzJobBean {
                     //写入堆内存信息
                     gcService.write(addressAddress,id,date,jstatGc);
                 }
+                CpuInfoEntity cpuInfo = CallingMethod.getCpuInfo(addressAddress);
+                String memoryUsage = CallingMethod.getMemoryUsage(addressAddress);
+                //写入系统当前CPU使用信息
+                cpuService.write(addressAddress,TimerUtil.now(),cpuInfo);
+                //写入系统当前内存使用信息
+                memoryService.write(addressAddress,TimerUtil.now(),memoryUsage);
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }

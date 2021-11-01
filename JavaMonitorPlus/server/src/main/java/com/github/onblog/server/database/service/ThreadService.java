@@ -1,7 +1,7 @@
 package com.github.onblog.server.database.service;
 
 import com.github.onblog.server.core.entity.JstackEntity;
-import com.github.onblog.server.database.dao.ThreadRespository;
+import com.github.onblog.server.database.dao.ThreadRepository;
 import com.github.onblog.server.database.entity.ThreadEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class ThreadService {
     @Autowired
-    private ThreadRespository threadRespository;
+    private ThreadRepository threadRepository;
 
     public List<ThreadEntity> findAllByAddressAndName(String address, String name) {
-        return threadRespository.findAllByAddressAndName(address, name);
+        return threadRepository.findAllByAddressAndName(address, name);
     }
 
     public void write(String address, String name, String date, JstackEntity jstatk) {
@@ -29,7 +29,7 @@ public class ThreadService {
         entity.setRUNNABLE(jstatk.getRUNNABLE());
         entity.setTIMED_WAITING(jstatk.getTIMED_WAITING());
         entity.setWAITING(jstatk.getWAITING());
-        threadRespository.save(entity);
+        threadRepository.save(entity);
     }
 
     public void clear() {
@@ -37,6 +37,6 @@ public class ThreadService {
     }
 
     public void clearAll() {
-        threadRespository.deleteAll();
+        threadRepository.deleteAll();
     }
 }

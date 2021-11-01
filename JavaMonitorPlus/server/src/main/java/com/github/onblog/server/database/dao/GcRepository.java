@@ -11,6 +11,6 @@ import java.util.List;
  * Create by yster@foxmail.com 2018/11/12 0012 21:38
  */
 @Repository
-public interface GcRespository extends JpaRepository<GcEntity, Integer> {
+public interface GcRepository extends JpaRepository<GcEntity, Integer> {
     List<GcEntity> findAllByAddressAndName(String address, String name);
 }
