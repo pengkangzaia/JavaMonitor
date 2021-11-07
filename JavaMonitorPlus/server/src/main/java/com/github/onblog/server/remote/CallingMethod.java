@@ -1,9 +1,6 @@
 package com.github.onblog.server.remote;
 
-import com.github.onblog.server.core.entity.JinfoEntity;
-import com.github.onblog.server.core.entity.JpsEntity;
-import com.github.onblog.server.core.entity.JstackEntity;
-import com.github.onblog.server.core.entity.KVEntity;
+import com.github.onblog.server.core.entity.*;
 import com.github.onblog.server.remote.util.HttpUtil;
 import com.alibaba.fastjson.JSON;
 
@@ -26,6 +23,11 @@ public class CallingMethod {
         return connectHost(url);
     }
 
+    public static String getMemoryUsage(String address) throws IOException {
+        String url = address + "/memUsage";
+        return connectHost(url);
+    }
+
     public static JinfoEntity getInfo(String address, String id) throws IOException {
         String url = address + "/info" + "?id=" + id;
         String body = connectHost(url);
@@ -37,6 +39,13 @@ public class CallingMethod {
         String body = connectHost(url);
         return JSON.parseObject(body,JstackEntity.class);
     }
+
+    public static CpuInfoEntity getCpuInfo(String address) throws IOException {
+        String url = address + "/cpuLoadInfo";
+        String body = connectHost(url);
+        return JSON.parseObject(body, CpuInfoEntity.class);
+    }
+
 
     public static Map<String, JpsEntity> getJps(String address) throws IOException {
         String url = address + "/jps";

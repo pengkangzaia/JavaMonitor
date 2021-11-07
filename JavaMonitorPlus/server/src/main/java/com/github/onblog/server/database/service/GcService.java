@@ -1,7 +1,7 @@
 package com.github.onblog.server.database.service;
 
 import com.github.onblog.server.core.entity.KVEntity;
-import com.github.onblog.server.database.dao.GcRespository;
+import com.github.onblog.server.database.dao.GcRepository;
 import com.github.onblog.server.database.entity.GcEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class GcService {
     @Autowired
-    private GcRespository gcRespository;
+    private GcRepository gcRepository;
 
     public void write(String address, String name, String date, List<KVEntity> kvEntities) {
         GcEntity entity = new GcEntity();
@@ -38,14 +38,14 @@ public class GcService {
         entity.setFGC(kvEntities.get(14).getValue());
         entity.setFGCT(kvEntities.get(15).getValue());
         entity.setGCT(kvEntities.get(16).getValue());
-        gcRespository.save(entity);
+        gcRepository.save(entity);
     }
 
     public List<GcEntity> findAllByAddressAndName(String address, String name) {
-        return gcRespository.findAllByAddressAndName(address, name);
+        return gcRepository.findAllByAddressAndName(address, name);
     }
 
     public void clearAll() {
-        gcRespository.deleteAll();
+        gcRepository.deleteAll();
     }
 }

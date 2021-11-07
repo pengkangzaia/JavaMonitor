@@ -1,9 +1,7 @@
 package com.github.onblog.server.timer.job;
 
 
-import com.github.onblog.server.database.service.ClassService;
-import com.github.onblog.server.database.service.GcService;
-import com.github.onblog.server.database.service.ThreadService;
+import com.github.onblog.server.database.service.*;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -23,6 +21,10 @@ public class ClearJob extends QuartzJobBean {
     private ClassService classService;
     @Autowired
     private ThreadService threadService;
+    @Autowired
+    private CpuService cpuService;
+    @Autowired
+    private MemoryService memoryService;
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -30,5 +32,7 @@ public class ClearJob extends QuartzJobBean {
         gcService.clearAll();
         classService.clearAll();
         threadService.clearAll();
+        cpuService.clearAll();
+        memoryService.clearAll();
     }
 }

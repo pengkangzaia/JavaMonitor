@@ -59,10 +59,44 @@ function thread() {
     });
 }
 
+
+function cpu() {
+    var socket = new SockJS('/websocket');
+    var stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/cpu', function (d) {
+            var data = JSON.parse(d.body)
+            cpuUsage(data);
+            cpuLoad(data);
+            setTimeout(function () {
+                stompClient.send("/app/cpu", {}, JSON.stringify({"address":address}));
+            }, interval_time);
+        });
+        stompClient.send("/app/cpu", {}, JSON.stringify({"address":address}));
+    });
+}
+
+function memory() {
+    var socket = new SockJS('/websocket');
+    var stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/memory', function (d) {
+            var data = JSON.parse(d.body)
+            memoryUsage(data);
+            setTimeout(function () {
+                stompClient.send("/app/memory", {}, JSON.stringify({"address":address}));
+            }, interval_time);
+        });
+        stompClient.send("/app/memory", {}, JSON.stringify({"address":address}));
+    });
+}
+
 //链接
 gc()
 cl()
 thread()
+cpu()
+memory()
 
 //设置频率
 $("#pinlv").click(function () {

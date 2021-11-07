@@ -33,6 +33,44 @@
         </div>
     </div>
 
+    <div class="layui-col-md12" style="margin: 10px 0 10px 0">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-green title">系统资源监控</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">系统CPU利用率</span>
+            </div>
+            <div class="layui-card-body" id="cpuUsage" style="height: 330px">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">系统CPU负载</span>
+            </div>
+            <div class="layui-card-body" id="cpuLoad" style="height: 330px">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">内存使用率</span>
+            </div>
+            <div class="layui-card-body" id="memoryUsage" style="height: 330px">
+            </div>
+        </div>
+    </div>
+
     <div class="layui-col-md12" style="margin-bottom: 10px">
         <div class="layui-card">
             <div class="layui-card-header">
@@ -168,22 +206,6 @@
         </div>
     </div>
 
-    <div class="layui-col-md6" style="margin: 10px 0 10px 0">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                <!--<span class="layui-badge layui-bg-green title">类加载监控</span>-->
-            </div>
-        </div>
-    </div>
-
-    <div class="layui-col-md6" style="margin: 10px 0 10px 0">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                <span class="layui-badge layui-bg-green title">类编译监控</span>
-            </div>
-        </div>
-    </div>
-
     <div class="layui-col-md6">
         <div class="layui-card">
             <div class="layui-card-header">
@@ -194,30 +216,23 @@
         </div>
     </div>
 
+
+    <div class="layui-col-md12" style="margin: 10px 0 10px 0">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-green title">类编译监控</span>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="layui-col-md6">
         <div class="layui-card">
             <div class="layui-card-header">
                 <span class="layui-badge layui-bg-cyan">类编译数量</span>
             </div>
             <div class="layui-card-body" id="comn" style="height: 330px">
-            </div>
-        </div>
-    </div>
-
-    <div class="layui-col-md6" style="margin: 10px 0 10px 0">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                <!--<span class="layui-badge layui-bg-green title">类编译监控</span>-->
-            </div>
-        </div>
-    </div>
-
-    <div class="layui-col-md6" style="margin: 10px 0 10px 0">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                <span class="layui-badge layui-bg-green title">线程监控</span>
-                <span style="float: right;"><button id="thread_button"
-                                                    class="layui-btn layui-btn-xs ">快照</button></span>
             </div>
         </div>
     </div>
@@ -232,6 +247,16 @@
         </div>
     </div>
 
+    <div class="layui-col-md12" style="margin: 10px 0 10px 0">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-green title">线程监控</span>
+                <span style="float: right;"><button id="thread_button"
+                                                    class="layui-btn layui-btn-xs ">快照</button></span>
+            </div>
+        </div>
+    </div>
+
     <div class="layui-col-md6">
         <div class="layui-card">
             <div class="layui-card-header">
@@ -241,6 +266,8 @@
             </div>
         </div>
     </div>
+
+
 
 </div>
 <script src="/lib/jquery.min.js"></script>
@@ -265,5 +292,8 @@
 <script src="/js/comt.js"></script>
 <script src="/js/combyte.js"></script>
 <script src="/js/thread.js"></script>
+<script src="/js/cpuUsage.js"></script>
+<script src="/js/cpuLoad.js"></script>
+<script src="/js/memoryUsage.js"></script>
 </body>
 </html>
