@@ -1,6 +1,7 @@
 package com.github.onblog.client.core.order;
 
 import com.github.onblog.client.core.cmd.ExecuteCmd;
+import com.github.onblog.client.core.entity.MemoryEntity;
 
 /**
  * @author pengkangzaia@foxmail.com
@@ -8,14 +9,15 @@ import com.github.onblog.client.core.cmd.ExecuteCmd;
  **/
 public class MemUsage {
 
-    public static String usage() {
-        String memUsage = ExecuteCmd.execute(new String[]{"sh","-c","free -m | grep Mem | awk '{print $3 / $2}'"});
-        return memUsage;
+    public static MemoryEntity usage() {
+        String memUsedPercent = ExecuteCmd.execute(new String[]{"sh","-c","free -m | grep Mem | awk '{print $3 / $2}'"});
+        String memUsed = ExecuteCmd.execute(new String[]{"sh","-c","free -m | grep Mem | awk '{print $3}'"});
+        return new MemoryEntity(memUsed, memUsedPercent);
     }
 
     public static void main(String[] args) {
-        String ans = usage();
-        System.out.println(ans);
+        MemoryEntity usage = usage();
+        System.out.println(usage);
     }
 
 

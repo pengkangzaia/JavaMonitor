@@ -55,7 +55,7 @@ public class OrderController {
     }
 
     @RequestMapping("/memUsage")
-    public String getMemUsage() {
+    public MemoryEntity getMemUsage() {
         return MemUsage.usage();
     }
 
