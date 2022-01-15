@@ -83,6 +83,7 @@ function memory() {
         stompClient.subscribe('/topic/memory', function (d) {
             var data = JSON.parse(d.body)
             memoryUsage(data);
+            memoryPercent(data);
             setTimeout(function () {
                 stompClient.send("/app/memory", {}, JSON.stringify({"address":address}));
             }, interval_time);

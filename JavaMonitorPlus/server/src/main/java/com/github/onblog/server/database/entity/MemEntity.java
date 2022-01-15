@@ -14,14 +14,15 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "memory_table")
-public class MemoryEntity {
+public class MemEntity {
 
     @Id
     @GeneratedValue
     private Integer id;
     private String address; //进程所在主机
     private String date; //x：时间
-    private String memoryUsage;
+    private String used;
+    private String usedPercent;
 
 
 }

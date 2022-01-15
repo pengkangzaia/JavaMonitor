@@ -1,6 +1,7 @@
 package com.github.onblog.server.remote;
 
 import com.github.onblog.server.core.entity.*;
+import com.github.onblog.server.database.entity.MemEntity;
 import com.github.onblog.server.remote.util.HttpUtil;
 import com.alibaba.fastjson.JSON;
 
@@ -23,9 +24,10 @@ public class CallingMethod {
         return connectHost(url);
     }
 
-    public static String getMemoryUsage(String address) throws IOException {
+    public static MemoryEntity getMemoryUsage(String address) throws IOException {
         String url = address + "/memUsage";
-        return connectHost(url);
+        String body = connectHost(url);
+        return JSON.parseObject(body, MemoryEntity.class);
     }
 
     public static JinfoEntity getInfo(String address, String id) throws IOException {

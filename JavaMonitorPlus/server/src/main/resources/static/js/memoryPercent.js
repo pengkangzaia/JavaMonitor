@@ -1,9 +1,9 @@
-function memoryUsage(data) {
-    var myChart = echarts.init(document.getElementById('memoryUsage'));
+function memoryPercent(data) {
+    var myChart = echarts.init(document.getElementById('memoryPercent'));
         myChart.setOption(option = {
             backgroundColor: background_color,
             title: {
-                subtext: '单位/MB',
+                subtext: '单位/%',
                 textStyle: {
                     color: '#fff'
                 }
@@ -37,10 +37,10 @@ function memoryUsage(data) {
             }],
             series: [
                 {
-                    name: "usage",
+                    name: "percent",
                     type: 'line',
                     data: data.map(function (item) {
-                        return item.used;
+                        return item.usedPercent;
                     }),
                     lineStyle: {
                         color: colors[0]

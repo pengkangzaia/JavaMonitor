@@ -54,7 +54,7 @@ public class GreetingController {
 
     @MessageMapping("/memory")
     @SendTo("/topic/memory")
-    public List<MemoryEntity> socketMemory(Message message) {
+    public List<MemEntity> socketMemory(Message message) {
         return memoryService.findAllByAddress(message.getAddress());
     }
 

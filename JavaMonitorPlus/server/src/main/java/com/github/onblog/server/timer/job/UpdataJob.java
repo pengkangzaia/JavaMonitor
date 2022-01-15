@@ -1,16 +1,13 @@
 package com.github.onblog.server.timer.job;
 
 
-import com.github.onblog.server.core.entity.CpuInfoEntity;
-import com.github.onblog.server.core.entity.JpsEntity;
-import com.github.onblog.server.core.entity.JstackEntity;
-import com.github.onblog.server.core.entity.KVEntity;
+import com.github.onblog.server.core.entity.*;
+import com.github.onblog.server.database.entity.MemEntity;
 import com.github.onblog.server.database.service.*;
 import com.github.onblog.server.remote.CallingMethod;
 import com.github.onblog.server.remote.parm.AddressParm;
 import com.github.onblog.server.remote.parm.entity.Address;
 import com.github.onblog.server.timer.util.TimerUtil;
-import jdk.nashorn.internal.codegen.CompilerConstants;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +36,8 @@ public class UpdataJob extends QuartzJobBean {
     private AddressParm address;
 
     @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext){
-        if (address.getServe()==null||address.getServe().size()==0){
+    protected void executeInternal(JobExecutionContext jobExecutionContext) {
+        if (address.getServe() == null || address.getServe().size() == 0) {
             throw new RuntimeException("没有配置要监控的远程主机");
         }
         logger.debug("Regularly updated data...");
@@ -51,23 +48,23 @@ public class UpdataJob extends QuartzJobBean {
                 Object[] s = jps.keySet().toArray();
                 for (Object o : s) {
                     String id = o.toString();
-                    JstackEntity jstatk = CallingMethod.getJstack(addressAddress,id);
-                    List<KVEntity> jstatClass = CallingMethod.getJstatClass(addressAddress,id);
-                    List<KVEntity> jstatGc = CallingMethod.getJstatGc(addressAddress,id);
+                    JstackEntity jstatk = CallingMethod.getJstack(addressAddress, id);
+                    List<KVEntity> jstatClass = CallingMethod.getJstatClass(addressAddress, id);
+                    List<KVEntity> jstatGc = CallingMethod.getJstatGc(addressAddress, id);
                     String date = TimerUtil.now();
                     //写入线程信息
-                    threadService.write(addressAddress,id,date,jstatk);
+                    threadService.write(addressAddress, id, date, jstatk);
                     //写入类加载信息
-                    classService.write(addressAddress,id,date,jstatClass);
+                    classService.write(addressAddress, id, date, jstatClass);
                     //写入堆内存信息
-                    gcService.write(addressAddress,id,date,jstatGc);
+                    gcService.write(addressAddress, id, date, jstatGc);
                 }
                 CpuInfoEntity cpuInfo = CallingMethod.getCpuInfo(addressAddress);
-                String memoryUsage = CallingMethod.getMemoryUsage(addressAddress);
+                MemoryEntity memoryEntity = CallingMethod.getMemoryUsage(addressAddress);
                 //写入系统当前CPU使用信息
-                cpuService.write(addressAddress,TimerUtil.now(),cpuInfo);
+                cpuService.write(addressAddress, TimerUtil.now(), cpuInfo);
                 //写入系统当前内存使用信息
-                memoryService.write(addressAddress,TimerUtil.now(),memoryUsage);
+                memoryService.write(addressAddress, TimerUtil.now(), memoryEntity);
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
