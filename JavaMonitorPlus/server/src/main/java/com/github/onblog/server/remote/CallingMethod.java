@@ -24,12 +24,6 @@ public class CallingMethod {
         return connectHost(url);
     }
 
-    public static MemoryEntity getMemoryUsage(String address) throws IOException {
-        String url = address + "/memUsage";
-        String body = connectHost(url);
-        return JSON.parseObject(body, MemoryEntity.class);
-    }
-
     public static JinfoEntity getInfo(String address, String id) throws IOException {
         String url = address + "/info" + "?id=" + id;
         String body = connectHost(url);
@@ -46,6 +40,18 @@ public class CallingMethod {
         String url = address + "/cpuLoadInfo";
         String body = connectHost(url);
         return JSON.parseObject(body, CpuInfoEntity.class);
+    }
+
+    public static MemoryEntity getMemoryUsage(String address) throws IOException {
+        String url = address + "/memUsage";
+        String body = connectHost(url);
+        return JSON.parseObject(body, MemoryEntity.class);
+    }
+
+    public static DiskEntity getDiskInfo(String address) throws IOException {
+        String url = address + "/disk";
+        String body = connectHost(url);
+        return JSON.parseObject(body, DiskEntity.class);
     }
 
 

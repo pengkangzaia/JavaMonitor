@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class GreetingController {
     private CpuService cpuService;
     @Autowired
     private MemoryService memoryService;
+    @Autowired
+    private DiskService diskService;
 
     @MessageMapping("/gc")
     @SendTo("/topic/gc")
@@ -55,7 +58,15 @@ public class GreetingController {
     @MessageMapping("/memory")
     @SendTo("/topic/memory")
     public List<MemEntity> socketMemory(Message message) {
-        return memoryService.findAllByAddress(message.getAddress());
+        List<MemEntity> res = memoryService.findAllByAddress(message.getAddress());
+        return res;
+    }
+
+    @MessageMapping("/disk")
+    @SendTo("/topic/disk")
+    public List<HardDiskEntity> socketDisk(Message message) {
+        List<HardDiskEntity> res = diskService.findAllByAddress(message.getAddress());
+        return res;
     }
 
 }

@@ -92,12 +92,32 @@ function memory() {
     });
 }
 
+function disk() {
+    var socket = new SockJS('/websocket');
+    var stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/disk', function (d) {
+            var data = JSON.parse(d.body)
+            diskio(data)
+            diskkb(data)
+            diskwait(data)
+            diskserver(data)
+            diskutil(data)
+            setTimeout(function () {
+                stompClient.send("/app/disk", {}, JSON.stringify({"address":address}));
+            }, interval_time);
+        });
+        stompClient.send("/app/disk", {}, JSON.stringify({"address":address}));
+    });
+}
+
 //链接
 gc()
 cl()
 thread()
 cpu()
 memory()
+disk()
 
 //设置频率
 $("#pinlv").click(function () {

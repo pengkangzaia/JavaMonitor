@@ -59,4 +59,9 @@ public class OrderController {
         return MemUsage.usage();
     }
 
+    @RequestMapping("/disk")
+    public DiskEntity getDiskInfo() {
+        return DiskInfo.usage();
+    }
+
 }

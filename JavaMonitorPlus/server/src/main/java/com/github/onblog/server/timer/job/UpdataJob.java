@@ -33,6 +33,8 @@ public class UpdataJob extends QuartzJobBean {
     @Autowired
     private MemoryService memoryService;
     @Autowired
+    private DiskService diskService;
+    @Autowired
     private AddressParm address;
 
     @Override
@@ -61,10 +63,12 @@ public class UpdataJob extends QuartzJobBean {
                 }
                 CpuInfoEntity cpuInfo = CallingMethod.getCpuInfo(addressAddress);
                 MemoryEntity memoryEntity = CallingMethod.getMemoryUsage(addressAddress);
+                DiskEntity diskEntity = CallingMethod.getDiskInfo(addressAddress);
                 //写入系统当前CPU使用信息
                 cpuService.write(addressAddress, TimerUtil.now(), cpuInfo);
                 //写入系统当前内存使用信息
                 memoryService.write(addressAddress, TimerUtil.now(), memoryEntity);
+                diskService.write(addressAddress, TimerUtil.now(), diskEntity);
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }

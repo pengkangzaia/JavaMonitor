@@ -81,6 +81,55 @@
         </div>
     </div>
 
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">磁盘IO次数</span>
+            </div>
+            <div class="layui-card-body" id="diskio" style="height: 330px">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">磁盘IO字节数</span>
+            </div>
+            <div class="layui-card-body" id="diskkb" style="height: 330px">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">磁盘读写等待时间</span>
+            </div>
+            <div class="layui-card-body" id="diskwait" style="height: 330px">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">磁盘服务时间</span>
+            </div>
+            <div class="layui-card-body" id="diskserver" style="height: 330px">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <span class="layui-badge layui-bg-cyan">磁盘/CPU利用率</span>
+            </div>
+            <div class="layui-card-body" id="diskutil" style="height: 330px">
+            </div>
+        </div>
+    </div>
 
 
     <div class="layui-col-md12" style="margin-bottom: 10px">
@@ -308,5 +357,10 @@
 <script src="/js/cpuLoad.js"></script>
 <script src="/js/memoryUsage.js"></script>
 <script src="/js/memoryPercent.js"></script>
+<script src="/js/diskio.js"></script>
+<script src="/js/diskkb.js"></script>
+<script src="/js/diskserver.js"></script>
+<script src="/js/diskwait.js"></script>
+<script src="/js/diskutil.js"></script>
 </body>
 </html>
