@@ -49,7 +49,7 @@
     function step(address,id){
         $("#iframe").attr("src","/monitor?pid="+id+"&address="+address);
         //加载动画
-        layer.load();
+        layer.load(2);
         setTimeout(function () {
             layer.closeAll('loading');
         }, 2000);
